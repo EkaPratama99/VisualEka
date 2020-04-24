@@ -1,0 +1,67 @@
+<html>
+<head>
+
+</head>
+<body style="background-color: burlywood;">
+    <div style="background-color: blanchedalmond;">
+        <center>
+        <table border="1" id="form">
+            <tr>
+                <th>CS</th>
+                <th><input type="text" id="cs" required></th>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <th><input type="date" id="date" DD-MM-YY></th>
+            </tr>
+            <tr>
+                <th>Instrument</th>
+                <th>
+                    <select>
+                        <option>Guitar</option>
+                        <option>Drum</option>
+                        <option>Bass</option>
+                        <option>Cajon</option>
+                        <option>Flute</option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <th><input type="number" id="price" onchange="total()"></th>
+            </tr>
+            <tr>
+                <th>Cash</th>
+                <th><input type="number" id="cash" onchange="total()"></th>
+            </tr>
+            <tr>
+                <th>Change</th>
+                <th><input type="text" id="change" disabled></th>
+            </tr>
+                <th><input type="button" value="reload" onclick="document.location.reload(true)"></input>
+            </th>
+            <tr>
+                <th><input type="button" style="background: rgb(255, 255, 255);" onclick="window.print()" value="PRINT"></input></th>
+            </tr>
+          
+         
+        </table>
+        <script type="text/javascript">
+        
+        function total(){
+            var price = parseInt(document.getElementById('price').value);
+            var cash = parseInt(document.getElementById('cash').value);
+            var change = cash-price;
+            document.getElementById('change').value=change;
+        }
+        function reloadpage(){
+            location.reload()
+        }
+        
+        </script>
+        </center>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+
+<head>                     
+</head>
+
+<body style="background-color: rgba(0, 47, 255, 0.205);">
+
+    <center>
+        <h1>Guitar.HUB</h1>
+        <h3>Music Store</h3>
+
+        <img src="guitar.1.jpg" height="400" width="600">
+    </center>
+    <div id="list"></div> 
+   
+</body>
+
+<script>
+    const electron = require("electron");
+    const {
+        ipcRenderer
+    } = electron;
+    ipcRenderer.send("appointment:request:today");
+
+    ipcRenderer.on("appointment:request:today", (event, appointment) =>{
+        const historyDiv = document.getElementById("history");
+        appointment.forEach(appointment => {
+            const appointmentDiv = document.createElement("div");
+
+        const csParagraph = document.createElement("p");    
+        csParagraph.innerHTML = `CS: ${appointment.cs}`;
+
+        const dateParagraph = document.createElement("p")
+        dateParagraph.innerHTML = `Date: ${appointment.date}`;
+
+        const intrumentParagraph = document.createElement("p")
+        instrumentParagraph.innerHTML = `Instrument: ${appointment.instrument}`;
+        
+        const priceParagraph = document.createElement("p")
+        priceParagraph.innerHTML = `Price: ${appointment.price}`;
+
+        const cashParagraph = document.createElement("p")
+        cashParagraph.innerHTML = `Cash: ${appointment.cash}`;
+
+        const doneParagraph = document.createElement("p")
+        doneParagraph.innerHTML = `Done: ${appointment.done ? "Yes" : "No"}`;
+        
+        const hr = document.createElement("hr");
+
+        appointmentDiv.appendChild(csParagraph);
+        appointmentDiv.appendChild(dateParagraph);
+        appointmentDiv.appendChild(instrumentParagraph);
+        appointmentDiv.appendChild(priceParagraph);
+        appointmentDiv.appendChild(cashParagraph);
+        appointmentDiv.appendChild(doneParagraph);
+        appointmentDiv.appendChild(hr);
+
+        historyDiv.append(appointmentDiv);
+
+                
+        });
+    });
+    const done = id => {
+        ipcRenderer.send("appointment:done", id);
+    };
+</script>
+
+
+</html>
