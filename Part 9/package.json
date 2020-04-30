@@ -1,0 +1,16 @@
+{
+  "name": "eka",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^8.0.0",
+    "uuid": "^7.0.3",
+    "uuidv4": "^6.0.7"
+  }
+}
