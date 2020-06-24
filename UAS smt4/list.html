@@ -1,0 +1,57 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>Customer History</h1>
+    <div id="list"></div>
+</body>
+
+<script>
+    const electron = require("electron");
+    const {
+        ipcRenderer
+    } = electron;
+    ipcRenderer.send("appointment:request:today");
+
+    ipcRenderer.on("appointment:request:today", (event, appointment) =>{
+        const listDiv = document.getElementById("list");
+        appointment.forEach(appointment => {
+            const appointmentDiv = document.createElement("div");
+
+        const csParagraph = document.createElement("p");    
+        csParagraph.innerHTML = `CS: ${appointment.cs}`;
+
+        const dateParagraph = document.createElement("p")
+        dateParagraph.innerHTML = `Date: ${appointment.date}`;
+
+        const intrumentParagraph = document.createElement("p")
+        instrumentParagraph.innerHTML = `Instrument: ${appointment.instrument}`;
+        
+        const priceParagraph = document.createElement("p")
+        priceParagraph.innerHTML = `Price: ${appointment.price}`;
+
+        const cashParagraph = document.createElement("p")
+        cashParagraph.innerHTML = `Cash: ${appointment.cash}`;
+
+        const doneParagraph = document.createElement("p")
+        doneParagraph.innerHTML = `Done: ${appointment.done ? "Yes" : "No"}`;
+        
+        const hr = document.createElement("hr");
+
+        appointmentDiv.appendChild(csParagraph);
+        appointmentDiv.appendChild(dateParagraph);
+        appointmentDiv.appendChild(instrumentParagraph);
+        appointmentDiv.appendChild(priceParagraph);
+        appointmentDiv.appendChild(cashParagraph);
+        appointmentDiv.appendChild(doneParagraph);
+        appointmentDiv.appendChild(hr);
+
+        listDiv.append(appointmentDiv);
+
+                
+        });
+    });
+</script>
+</html>
